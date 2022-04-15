@@ -1,0 +1,20 @@
+{
+  "name": "suggestion-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "DEF",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "4",
+    "discord-modals": "1",
+    "discord.js": "13",
+    "ora": "5",
+    "quick.db": "7"
+  }
+}

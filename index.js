@@ -69,7 +69,7 @@ client.on("interactionCreate", async(interaction) => {
     if (interaction.commandName == "set-suggestion-channel") {
         if (!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD))
         return interaction.reply(
-            {content:"you need some permissions to allow you using **`"+interaction.commandName+"`** command.",ephemeral:true}
+            {content:"You need more permissions to use **`"+interaction.commandName+"`** command.",ephemeral:true}
         )
         let channel = interaction.channelId;
         let  value   = {channel:channel}
@@ -89,7 +89,7 @@ client.on("interactionCreate", async(interaction) => {
 
         data.delete(key)
         interaction.reply(
-            {content:"suggestion channel has been rested.",ephemeral:true}
+            {content:"Suggestion channel has been removed.",ephemeral:true}
         )
     }
     else if (interaction.commandName == "get-user-suggestions") {
@@ -110,7 +110,7 @@ client.on("interactionCreate", async(interaction) => {
     else if (interaction.commandName == "send-suggestion") {
         const modal = new modals.Modal()
         .setCustomId('send')
-        .setTitle('type you suggestion down blow:')
+        .setTitle('type you suggestion down below:')
         .addComponents(
           new modals.TextInputComponent()
             .setCustomId('input')
@@ -139,11 +139,11 @@ client.on('modalSubmit', async (modal) => {
       let       channel       = client.channels.cache.get(value);
 
       if (!channel) return modal.reply(
-        {content:'Soory! i can not find the suggestion channel in this server',ephemeral:true}
+        {content:'Sorry! I can not find the suggestion channel in this server',ephemeral:true}
       );
 
       modal.reply(
-        {content:'Done! your suggestion has been send successfully, you suggestion:```\n'+res+'```',ephemeral:true}
+        {content:'Done! Your suggestion has been sent successfully, suggestion:```\n'+res+'```',ephemeral:true}
       );
       channel.send({
         embeds: [
@@ -172,7 +172,7 @@ client.on('modalSubmit', async (modal) => {
             new Discord.MessageButton()
             .setCustomId("info")
             .setStyle("SECONDARY")
-            .setLabel("❓ How Voted"),
+            .setLabel("❓ Who Voted"),
           )
         ]
     }).then(async message => {
@@ -235,7 +235,7 @@ client.on("messageCreate", (msg) => {
             new Discord.MessageButton()
             .setCustomId("info")
             .setStyle("SECONDARY")
-            .setLabel("❓ How Voted"),
+            .setLabel("❓ Who Voted"),
           )
         ]
     }).then(async message => {
@@ -269,7 +269,7 @@ async function buttons(interaction) {
             let    value    = {user:interaction.user,date: dater}
             let  newNumber  = Number(embed.fields[0].value.split("```\n")[1].split("```")[0]) + 1;
             let    voter   = data.fetch(message.id.toString()).voters;
-            if (voter.includes(interaction.user.id)) return interaction.followUp({content:"you has voted for this suggestion befor.", ephemeral:true});
+            if (voter.includes(interaction.user.id)) return interaction.followUp({content:"You have voted for this suggestion before.", ephemeral:true});
             let editedEmbed = {author:embed.author,color:embed.color,timestamp: embed.timestamp,footer:embed.footer,
                 description:embed.description,fields:[
                 {name:"👍 Up votes:",value:`\`\`\`\n${newNumber}\`\`\``,inline:true},
@@ -290,7 +290,7 @@ async function buttons(interaction) {
             let    value    = {user:interaction.user,date: dater}
             let  newNumber  = Number(embed.fields[1].value.split("```\n")[1].split("```")[0]) + 1;
             let    voter   = data.fetch(message.id.toString()).voters;
-            if (voter.includes(interaction.user.id)) return interaction.followUp({content:"you has voted for this suggestion befor.", ephemeral:true});
+            if (voter.includes(interaction.user.id)) return interaction.followUp({content:"You have voted for this suggestion before.", ephemeral:true});
             let editedEmbed = {author:embed.author,color:embed.color,timestamp: embed.timestamp,footer:embed.footer,
                 description:embed.description,fields:[
                 embed.fields[0],
@@ -306,7 +306,7 @@ async function buttons(interaction) {
             let   voters   = data.fetch(interaction.message.id.toString()).votersInfo;
             let    raws    = voters.map((voter, index) => `${index + 1}. ${voter.user.username} - ${voter.date}`).join("\n")
 
-            if (voters == []) return interaction.followUp({content:"there is no voters", ephemeral:true}); 
+            if (voters == []) return interaction.followUp({content:"There are no voters", ephemeral:true}); 
 
             interaction.followUp({content:raws, ephemeral:true}); 
         }

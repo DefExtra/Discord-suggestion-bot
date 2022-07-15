@@ -9,12 +9,14 @@
   },
   "keywords": [],
   "author": "DEF",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^7.6.1",
     "chalk": "4",
     "discord-modals": "1",
     "discord.js": "13",
+    "moment": "^2.29.4",
     "ora": "5",
-    "quick.db": "7"
+    "quick.db": "^9.0.5"
   }
 }

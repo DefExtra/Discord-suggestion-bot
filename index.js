@@ -1,20 +1,15 @@
 // |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
-// |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
-// |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
 
-// did you see casperMusic? chack out: https://discord.gg/ws9jA2cR5s
+// did you see casperMusic? check out: https://discord.gg/ws9jA2cR5s
 
 /**
    ⚠️ stop right there ⚠️
 
    did you know you are stealing my project when you remove the copyright?
    you can just contact me http://discord.com/users/933856726770413578 for publish it
-   or if you are using it for your server know the no one will see the copyrights only you in the project
+   or if you are using it for your server know then no one will see the copyrights only you in the project
    so why you are removing it?, be nice and just leave it
 
-
-   |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
-   |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
    |****  ⚠️ ALL COPYRIGHTS GOSE TO DEF(http://discord.com/users/933856726770413578) ⚠️  ****|
  */
 
@@ -47,7 +42,7 @@ client.on("ready", () => {
         ]},
     ];
     client.application.commands.set(commands)
-}).login(fs.readFileSync(__dirname+"/token.txt", {encoding:"utf-8"}));
+}).login(fs.readFileSync(__dirname+"/.env", {encoding:"utf-8"}));
 
 // interactionDetected event
 client.on("interactionCreate", async(interaction) => {
@@ -83,7 +78,7 @@ client.on("interactionCreate", async(interaction) => {
     else if (interaction.commandName == "remove-suggestion-channel") {
         if (!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD))
         return interaction.reply(
-            {content:"you need some permissions to allow you using **`"+interaction.commandName+"`** command.",ephemeral:true}
+            {content:"you need permissions to use the **`"+interaction.commandName+"`** command.",ephemeral:true}
         )
         let key     = "SuggestionsChannel_"+interaction.guild?.id;
 
@@ -98,7 +93,7 @@ client.on("interactionCreate", async(interaction) => {
         let    udata    = data.fetch(userKey);
 
         if (udata == null) return interaction.reply(
-            {content:"<@"+userInfos.id+"> has no suggestion on **"+interaction.guild?.name+"**.",ephemeral:true}
+            {content:"<@"+userInfos.id+"> has no suggestions on **"+interaction.guild?.name+"**.",ephemeral:true}
         )
         else {
             let calSugs = await udata.map((message, index) => `${index + 1}. [go to suggestion message](${message.url})\n\`\`\`\n${message.content}\`\`\``).join("\n\n");
@@ -110,7 +105,7 @@ client.on("interactionCreate", async(interaction) => {
     else if (interaction.commandName == "send-suggestion") {
         const modal = new modals.Modal()
         .setCustomId('send')
-        .setTitle('type you suggestion down below:')
+        .setTitle('type your suggestion down below:')
         .addComponents(
           new modals.TextInputComponent()
             .setCustomId('input')
@@ -118,7 +113,7 @@ client.on("interactionCreate", async(interaction) => {
             .setStyle('LONG')
             .setMinLength(3)
             .setMaxLength(1024)
-            .setPlaceholder('write the suggestion here!.')
+            .setPlaceholder('write the suggestion here!')
             .setRequired(true)
         );
 
@@ -163,7 +158,7 @@ client.on('modalSubmit', async (modal) => {
           .addComponents(
             new Discord.MessageButton()
             .setCustomId("up")
-            .setStyle("DANGER")
+            .setStyle("SUCCESS")
             .setLabel("👍 Up"),
             new Discord.MessageButton()
             .setCustomId("down")
@@ -226,7 +221,7 @@ client.on("messageCreate", (msg) => {
           .addComponents(
             new Discord.MessageButton()
             .setCustomId("up")
-            .setStyle("DANGER")
+            .setStyle("SUCCESS")
             .setLabel("👍 Up"),
             new Discord.MessageButton()
             .setCustomId("down")
